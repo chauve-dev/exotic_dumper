@@ -1,0 +1,24 @@
+{
+    "name": "jeantet/exotic_dumper",
+    "description": "A composer package to dump var in new ways.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "files": ["auto.php"],
+        "psr-4": {
+            "Jeantet\\ExoticDumper\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Joey JEANTET",
+            "email": "jeantetjoey.pro@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "symfony/var-dumper": "^6.1",
+        "symfony/serializer": "^6.1",
+        "symfony/property-access": "^6.1"
+    }
+}
