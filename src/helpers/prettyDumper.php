@@ -96,6 +96,8 @@ function pretty_dump($data, $hide = false, $name = 'var_dump')
                 document.querySelectorAll('.var_dump_exotic.hide').forEach(el => {
                     el.style.left = prev;
                     el.style.top = '';
+                    el.style.width = '';
+                    el.style.height = '';
                     prev = el.clientWidth
                 });
             }
