@@ -95,6 +95,7 @@ function pretty_dump($data, $hide = false, $name = 'var_dump')
                 let prev = 0;
                 document.querySelectorAll('.var_dump_exotic.hide').forEach(el => {
                     el.style.left = prev;
+                    el.style.top = '';
                     prev = el.clientWidth
                 });
             }
@@ -116,7 +117,7 @@ function pretty_dump($data, $hide = false, $name = 'var_dump')
                 function dragMouseDown(e) {
                     e = e || window.event;
                     e.preventDefault();
-                    if(e.target.parentNode.classList.contains('hide')) {
+                    if(e.target.closest('.var_dump_exotic.hide') !== null) {
                         return false;
                     }
                     pos3 = e.clientX;
