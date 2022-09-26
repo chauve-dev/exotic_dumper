@@ -6,13 +6,13 @@ function pretty_dump($data, $hide = false, $name = 'var_dump')
 {
     $id = uniqid();
     ?>
-    <div onclick="clicked_dump(this)" id="<?= $id ?>" class="var_dump_6tk<?= $hide ? '' : ' hide' ?>">
-        <div id="<?= $id ?>header" class="var_dump_6tk-title">
+    <div onclick="clicked_dump(this)" id="<?= $id ?>" class="var_dump_exotic<?= $hide ? '' : ' hide' ?>">
+        <div id="<?= $id ?>header" class="var_dump_exotic-title">
             <span><?= $name ?></span>
             <span onclick="hide('<?= $id ?>')" id="toggle-<?= $id ?>"></span>
         </div>
         <style>
-            .var_dump_6tk.hide {
+            .var_dump_exotic.hide {
                 position: fixed;
                 bottom: 0;
                 left: 0;
@@ -20,13 +20,13 @@ function pretty_dump($data, $hide = false, $name = 'var_dump')
                 resize: none;
             }
 
-            .var_dump_6tk.hide pre {
+            .var_dump_exotic.hide pre {
                 height: 0;
                 padding: 0;
                 margin: 0;
             }
 
-            .var_dump_6tk {
+            .var_dump_exotic {
                 position: fixed;
                 max-height: 80vh;
                 border: 2px solid red;
@@ -35,21 +35,21 @@ function pretty_dump($data, $hide = false, $name = 'var_dump')
                 overflow: auto;
             }
 
-            .var_dump_6tk a {
+            .var_dump_exotic a {
                 text-decoration: none;
             }
 
-            .var_dump_6tk:active {
+            .var_dump_exotic:active {
                 z-index: 1001;
                 border-color: lawngreen;
             }
 
-            .var_dump_6tk:target {
+            .var_dump_exotic:target {
                 z-index: 1000;
                 border-color: lawngreen;
             }
 
-            .var_dump_6tk > .var_dump_6tk-title {
+            .var_dump_exotic > .var_dump_exotic-title {
                 display: flex;
                 background: black;
                 justify-content: space-between;
@@ -59,7 +59,7 @@ function pretty_dump($data, $hide = false, $name = 'var_dump')
                 font-family: "Arial", sans-serif;
             }
 
-            .var_dump_6tk > .var_dump_6tk-title #toggle-<?= $id ?> {
+            .var_dump_exotic > .var_dump_exotic-title #toggle-<?= $id ?> {
                 background-color: red;
                 width: 15px;
                 height: 15px;
@@ -68,11 +68,11 @@ function pretty_dump($data, $hide = false, $name = 'var_dump')
                 justify-content: center;
             }
 
-            .var_dump_6tk.hide > .var_dump_6tk-title #toggle-<?= $id ?> {
+            .var_dump_exotic.hide > .var_dump_exotic-title #toggle-<?= $id ?> {
                 background-color: lime;
             }
 
-            .var_dump_6tk > pre {
+            .var_dump_exotic > pre {
                 margin: 0;
                 height: calc(100% - 2rem);
             }
@@ -87,11 +87,13 @@ function pretty_dump($data, $hide = false, $name = 'var_dump')
 
             function hide(id) {
                 document.getElementById(id).classList.toggle('hide');
+                document.getElementById(id).style.left = '';
+                document.getElementById(id).style.top = '';
             }
 
             function order_dump(){
                 let prev = 0;
-                document.querySelectorAll('.var_dump_6tk.hide').forEach(el => {
+                document.querySelectorAll('.var_dump_exotic.hide').forEach(el => {
                     el.style.left = prev;
                     prev = el.clientWidth
                 });
