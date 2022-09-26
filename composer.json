@@ -2,7 +2,7 @@
     "name": "jeantet/exotic_dumper",
     "description": "A composer package to dump var in new ways.",
     "type": "library",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "license": "MIT",
     "autoload": {
         "files": ["auto.php"],
