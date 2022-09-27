@@ -22,6 +22,6 @@
   "require": {
     "symfony/var-dumper": "^6.1",
     "symfony/serializer": "^5.0",
-    "symfony/property-access": "^6.1"
+    "symfony/property-access": "^5.0"
   }
 }
