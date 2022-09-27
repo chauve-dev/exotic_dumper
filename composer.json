@@ -2,7 +2,7 @@
   "name": "jeantet/exotic_dumper",
   "description": "A composer package to dump var in new ways.",
   "type": "library",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "autoload": {
     "files": [
@@ -21,7 +21,7 @@
   "minimum-stability": "stable",
   "require": {
     "symfony/var-dumper": "^6.1",
-    "symfony/serializer": "^6.1",
+    "symfony/serializer": "^5.0",
     "symfony/property-access": "^6.1"
   }
 }
