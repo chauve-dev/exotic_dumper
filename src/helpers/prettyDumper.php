@@ -2,14 +2,23 @@
 
 use Symfony\Component\VarDumper\VarDumper;
 
+/**
+ * @param mixed $data data to display
+ * @param bool $hide should hide dump ?
+ * @param string $name name of the dump
+ * @return void
+ */
 function pretty_dump($data, $hide = false, $name = 'var_dump')
 {
     $id = uniqid();
     ?>
-    <div onclick="clicked_dump(this)" id="<?= $id ?>" class="var_dump_exotic<?= $hide ? '' : ' hide' ?>">
+    <div onclick="clicked_dump(this)" id="<?= $id ?>" class="var_dump_exotic<?= $hide ? ' hide' : '' ?>">
         <div id="<?= $id ?>header" class="var_dump_exotic-title">
             <span><?= $name ?></span>
-            <span onclick="hide('<?= $id ?>')" id="toggle-<?= $id ?>"></span>
+            <span class="var_dump_exotic-actions">
+                <span onclick="min('<?= $id ?>')" id="min-<?= $id ?>"></span>
+                <span onclick="hide('<?= $id ?>')" id="toggle-<?= $id ?>"></span>
+            </span>
         </div>
         <style>
             .var_dump_exotic.hide {
@@ -20,7 +29,12 @@ function pretty_dump($data, $hide = false, $name = 'var_dump')
                 resize: none;
             }
 
-            .var_dump_exotic.hide pre {
+            .var_dump_exotic-container {
+                overflow: auto;
+                height: calc(100% - 30px);
+            }
+
+            .var_dump_exotic.hide .var_dump_exotic-container {
                 height: 0;
                 padding: 0;
                 margin: 0;
@@ -28,11 +42,29 @@ function pretty_dump($data, $hide = false, $name = 'var_dump')
 
             .var_dump_exotic {
                 position: fixed;
-                max-height: 80vh;
                 border: 2px solid red;
                 z-index: 999;
                 resize: both;
-                overflow: auto;
+                overflow: hidden;
+                min-width: 150px;
+                background-color: #18171B;
+            }
+
+
+            .var_dump_exotic-container::-webkit-scrollbar-track
+            {
+                background-color: #18171B;
+            }
+
+            .var_dump_exotic-container::-webkit-scrollbar
+            {
+                width: 10px;
+                background-color: #18171B;
+            }
+
+            .var_dump_exotic-container::-webkit-scrollbar-thumb
+            {
+                background-color: #4f4f4f;
             }
 
             .var_dump_exotic a {
@@ -49,18 +81,33 @@ function pretty_dump($data, $hide = false, $name = 'var_dump')
                 border-color: lawngreen;
             }
 
+            .var_dump_exotic .var_dump_exotic-actions {
+                display: flex;
+                gap: 10px;
+            }
+
             .var_dump_exotic > .var_dump_exotic-title {
                 display: flex;
                 background: black;
                 justify-content: space-between;
+                align-items: center;
                 color: white;
                 padding: 4px;
-                height: calc(2rem - 18px);
+                height: 30px;
                 font-family: "Arial", sans-serif;
             }
 
             .var_dump_exotic > .var_dump_exotic-title #toggle-<?= $id ?> {
                 background-color: red;
+                width: 15px;
+                height: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .var_dump_exotic > .var_dump_exotic-title #min-<?= $id ?> {
+                background-color: yellow;
                 width: 15px;
                 height: 15px;
                 display: flex;
@@ -74,10 +121,9 @@ function pretty_dump($data, $hide = false, $name = 'var_dump')
 
             .var_dump_exotic > pre {
                 margin: 0;
-                height: calc(100% - 2rem);
             }
         </style>
-        <?php VarDumper::dump($data); ?>
+        <div class="var_dump_exotic-container"><?php VarDumper::dump($data); ?></div>
         <script>
             order_dump();
             function clicked_dump(e) {
@@ -89,6 +135,10 @@ function pretty_dump($data, $hide = false, $name = 'var_dump')
                 document.getElementById(id).classList.toggle('hide');
                 document.getElementById(id).style.left = '';
                 document.getElementById(id).style.top = '';
+            }
+
+            function min(id) {
+                document.getElementById(id).style.height = '20vh';
             }
 
             function order_dump(){
