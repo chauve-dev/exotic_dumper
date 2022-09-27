@@ -148,7 +148,7 @@ function pretty_dump($data, $hide = false, $name = 'var_dump')
                     el.style.top = '';
                     el.style.width = '';
                     el.style.height = '';
-                    prev = el.clientWidth
+                    prev = el.clientWidth + prev
                 });
             }
 
